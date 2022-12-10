@@ -68,3 +68,22 @@ const sumSmallDirs = (folder: Folder): number =>
 export function part1(input: string): number {
   return sumSmallDirs(mapStructure(input))
 }
+
+export function part2(input: string): number {
+  const struct              = mapStructure(input)
+  const totalSpaceAvailable = 70_000_000
+  const spaceNeeded         = 30_000_000
+  const usedSpace           = struct.size
+
+  const findSize = (folders: Folder[], perfectSize: number): number =>
+    folders.reduce((size: number, folder: Folder) =>
+      findSize(
+        folder.folders,
+        (folder.size < size && totalSpaceAvailable - usedSpace + folder.size >= spaceNeeded)
+          ? folder.size
+          : size
+      )
+    , perfectSize)
+
+  return findSize(struct.folders, Infinity)
+}

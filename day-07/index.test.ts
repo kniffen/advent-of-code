@@ -1,4 +1,4 @@
-import { part1 } from './index'
+import { part1, part2 } from './index'
 
 describe('Day 07', function() {
   const testInput = 
@@ -27,5 +27,6 @@ $ ls
 7214296 k`
 
   it('part 1', () => expect(part1(testInput)).toEqual(95437))
+  it('part 2', () => expect(part2(testInput)).toEqual(24933642))
 
 })
