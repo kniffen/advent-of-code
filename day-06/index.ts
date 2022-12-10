@@ -1,13 +1,9 @@
-import path from 'path'
-import fs from 'fs'
+function getMarker(input: string, distinct: number) {
+  return input.split('')
+              .findIndex((c, i, s) => distinct <= s.slice(i, i + distinct)
+                                                   .reduce((s, c) => s.includes(c) ? s : [...s, c], [])
+                                                   .length) + distinct
+}
 
-import getMarker from './getMarker'
-
-const input = fs.readFileSync(path.resolve(__dirname, 'input.txt'), 'utf8')
-
-console.log(`
-Advent of Code 2022: Day 06
----------------------------
-Part 1: ${getMarker(input, 4)}
-Part 2: ${getMarker(input, 14)}
-`)
+export const part1 = (input: string) => getMarker(input, 4)
+export const part2 = (input: string) => getMarker(input, 14)

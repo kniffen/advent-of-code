@@ -1,14 +1,31 @@
-import path from 'path'
-import fs from 'fs'
+function parseInput(input: string) {
+  const elves: number[][] = []
+  const lines = input.split('\n')
+  let index = 0
 
-import part1 from './part1'
-import part2 from './part2'
+  for (const line of lines) {
+    if ('' === line) {
+      index++
+      continue
+    }
 
-const input = fs.readFileSync(path.resolve(__dirname, 'input.txt'), 'utf8')
+    if (!elves[index]) elves[index] = []
+    elves[index].push(parseInt(line))
+  }
 
-console.log(`
-Advent of Code 2022: Day 01
----------------------------
-Part 1: ${part1(input)}
-Part 2: ${part2(input)}
-`)
+  return elves
+}
+
+export function part1(input: string) {
+  return parseInput(input).reduce((high, curr) => {
+      const totCal = curr.reduce((tot, cal) => tot+cal, 0)
+      return (high < totCal) ? totCal : high
+    }, 0)
+}
+
+export function part2(input: string) {
+  const totals = parseInput(input).map(elf => elf.reduce((tot, cal) => tot+cal, 0))
+  totals.sort((a, b) => b - a)
+  
+  return totals[0] + totals[1] + totals[2]
+}

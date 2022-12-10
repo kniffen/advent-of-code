@@ -1,14 +1,21 @@
-import path from 'path'
-import fs from 'fs'
+function parseInput(input: string) {
+  return input
+    .split('\n')
+    .map(line => line.match(/\d+/g).map(n => parseInt(n)))
+    .map(arr => [
+      arr.slice(0, arr.length / 2),
+      arr.slice(-(arr.length / 2))
+    ])
+}
 
-import part1 from './part1'
-import part2 from './part2'
+export function part1(input: string) {
+  return parseInput(input)
+    .map(pair => pair.map(([ a, b ]) => (new Array(b - a + 1).fill(0).map((v, i) => String.fromCharCode(a + i))).join('')))
+    .reduce((count, [ a, b ]) => a.includes(b) || b.includes(a) ? count + 1 : count, 0)
+}
 
-const input = fs.readFileSync(path.resolve(__dirname, 'input.txt'), 'utf8')
-
-console.log(`
-Advent of Code 2022: Day 04
----------------------------
-Part 1: ${part1(input)}
-Part 2: ${part2(input)}
-`)
+export function part2(input: string) {
+  return parseInput(input)
+    .map(pair => pair.map(([ a, b ]) => (new Array(b - a + 1).fill(0).map((v, i) => a + i))))
+    .reduce((count, [ a, b ]) => a.find(c => b.includes(c)) ? count + 1 : count, 0)
+}

@@ -1,12 +1,14 @@
-import path from 'path'
-import fs from 'fs'
-
-import part1 from './part1'
-import part2 from './part2'
+import { part1, part2 } from './index'
 
 describe('Day 03', function() {
-  const input = fs.readFileSync(path.resolve(__dirname, './testInput.txt'), 'utf8')
-  
-  it('part 1', () => expect(part1(input)).toEqual(157))
-  it('part 2', () => expect(part2(input)).toEqual(70))
+  const testInput =
+`vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw`
+
+  it('part 1', () => expect(part1(testInput)).toEqual(157))
+  it('part 2', () => expect(part2(testInput)).toEqual(70))
 })
