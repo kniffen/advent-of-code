@@ -1,4 +1,4 @@
-import { part1 } from './index'
+import { part1, part2 } from './index'
 
 describe('Day 08', function() {
   const testInput =
@@ -9,5 +9,6 @@ describe('Day 08', function() {
 35390`
 
   it('part 1', () => expect(part1(testInput)).toEqual(21))
+  it('part 2', () => expect(part2(testInput)).toEqual(8))
 
 })
